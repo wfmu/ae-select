@@ -1,6 +1,55 @@
 # Ae-select
 
-This README outlines the details of collaborating on this Ember addon.
+Select component used by Audience Engine ember apps
+
+### Usage
+```hbs
+   {{ae-select
+    content=unitedStates
+    selection=selectedState
+    prompt="Select a state"
+    action=(action (mut selectedState))
+    optionValuePath="id"
+    optionLabelPath="text"
+    required=true
+    name=name
+  }}
+```
+
+```js
+
+Ember.Controller.extend({
+  selectedState: null,
+  unitedStates: [{
+      id: 1,
+      text: "Alaska"
+    },
+    {
+      id: 2,
+      text: "Arizona"
+    },
+    {
+      id: 3,
+      text: "Arkansas"
+    },
+    {
+      id: 4,
+      text: "California"
+    },
+    {
+      id: 5,
+      text: "Colorado"
+    },
+    {
+      id: 6,
+      text: "Connecticut"
+    },
+    ...
+  ]
+})
+```
+
+If your 
 
 ## Installation
 
