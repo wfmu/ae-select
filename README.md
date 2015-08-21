@@ -17,8 +17,7 @@ Select component used by Audience Engine ember apps
 ```
 
 ```js
-
-Ember.Controller.extend({
+export default Ember.Controller.extend({
   selectedState: null,
   unitedStates: [{
       id: 1,
@@ -49,7 +48,36 @@ Ember.Controller.extend({
 })
 ```
 
-If your 
+This addon also supports working with arrays of strings as options.
+
+```hbs
+   {{ae-select
+    content=unitedStates
+    selection=selectedState
+    prompt="Select a state"
+    action=(action (mut selectedState))
+    optionValuePath="id"
+    optionLabelPath="text"
+    required=true
+    name=name
+  }}
+```
+
+```js
+export default Ember.Controller.extend({
+  selectedState: null,
+  unitedStates: [
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    ...
+  ]
+})
+```
+
 
 ## Installation
 
