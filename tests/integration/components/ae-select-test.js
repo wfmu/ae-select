@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 moduleForComponent('ae-select', 'Integration | Component | ae select', {
   integration: true
@@ -164,4 +165,24 @@ test('it renders the options using the optionLabelPath if they are objects', fun
   }}`);
 
   assert.equal(this.$('option').text().trim().replace(/\s+/g, ' '), 'option 1 option 2 option 3');
+});
+
+test('action sends the correct value when content is an ArrayProxy', function(assert) {
+  assert.expect(1);
+
+  var pets = ['dog', 'cat', 'fish'];
+  var arrayProxy = Ember.ArrayProxy.create({ content: Ember.A(pets) });
+
+  this.set('content', arrayProxy);
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
+
+  this.render(hbs`{{ae-select
+    content=content
+    action=(action (mut selectedValue))
+  }}`);
+
+  this.$('select').trigger('change');
+
+  assert.equal(this.get('selectedValue'), 'dog');
 });

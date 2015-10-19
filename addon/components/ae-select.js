@@ -44,7 +44,8 @@ export default Ember.Component.extend({
       const hasPrompt = !!this.get('prompt');
       const contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
 
-      const selection = content[contentIndex];
+      // Use `objectAt` to work arround issues when content is a DS.hasMany relationship
+      const selection = Ember.A(content).objectAt(contentIndex);
 
       // set the local, shadowed selection to avoid leaking
       // changes to `selection` out via 2-way binding
